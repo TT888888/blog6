@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        .box{
+            width:600px;
+            margin:0 auto;
+        }
+        h1{
+            text-align: center;
+        }
+        form{
+            margin:10px 0;
+            text-align: right;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1><a href="/post/home/">MyBlog</a></h1>
+        <form action="/post/search" class="'fo" method="post" >
+            {% csrf_token %}
+            <input type="text" name="keyword">
+            <input type="submit" name="搜索">
+            <a href="/post/create">新建</a>
+        </form>
+
+        <hr>
+
+        <div>
+            {%block content%}
+            {%endblock%}
+        </div>
+        <div>
+            访问人数
+            <span>1</span>
+        </div>
+    </div>
+</body>
+</html>

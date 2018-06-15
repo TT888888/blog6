@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div style="clear: both">
+        <h1>{{article.title}}</h1>
+        <span>{{article.create}}</span>
+        <div style="float: right">
+            <a href="/post/editor?aid={{article.id}}">编辑</a>
+             <a href="/post/delete?aid={{article.id}}">删除</a>
+        </div>
+        <hr>
+
+        <!--正文-->
+        <div style="background:orange;width:600px;" >
+            {{article.content|linebreaks}}
+        </div>
+
+         <hr>
+        <!--评论-->
+        <div>
+            {% for c in comments %}
+                <div>
+                    <div><span>{{c.create}}</span>***{{c.name}}:说</div>
+                    <div>{{c.content|linebreaks}}</div>
+                </div>
+                <hr/>
+            {% endfor %}
+
+
+        </div>
+
+        <!--发表评论-->
+
+        <form action="/post/comment/" method="post">
+            {% csrf_token %}
+            <div>
+                姓名：
+                <input type="text" name="name">
+            </div>
+
+            <div>
+                <span>内容</span>
+                <textarea name="content" id="" cols="30" rows="10"></textarea>
+            </div>
+
+            <input type="hidden" name="aid" value="{{article.id}}">
+            <input type="submit" value="发表文章">
+        </form>
+    </div>
+{% endblock %}
